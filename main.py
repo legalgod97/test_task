@@ -1,16 +1,11 @@
 def get_parent_sections(building_id: int) -> list[Section]:
   parent_sections = []
-  # Получаем все секции для данного объекта строительства
   sections = Section.objects.filter(building_id=building_id)
   for section in sections:
-    # Проверяем, является ли секция родительской (имеет дочерние секции)
     if section.parent is None:
       continue
-    # Получаем все расходы (расценки) для данной секции
     expenditures = Expenditure.objects.filter(section=section)
-    # Считаем бюджет для секции
     budget = sum(expenditure.count * expenditure.price for expenditure in expenditures)
-    # Добавляем секцию в список результатов
     parent_sections.append({
       'section': section,
       'budget': budget
