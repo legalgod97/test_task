@@ -34,9 +34,6 @@ def get_buildings() -> list[dict]:
 
 
 def update_with_discount(section_id: int, discount: Decimal):
-    """
-    @param discount: Размер скидки в процентах от Decimal(0) до Decimal(100)
-    """
     if discount < Decimal(0) or discount > Decimal(100):
         raise ValueError('Скидка должна быть от 0 до 100 процентов')
 
